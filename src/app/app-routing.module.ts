@@ -9,8 +9,8 @@ const routes: Routes = [
   children:[
     {path:"",component:DashboardComponent},//Admin den sonra ana sayfa niteligindeki yapılarda direkt olarak component cagrilir. Yani lazylaoding i uygulamıyoruz.
     {path:"customers",loadChildren:()=>import("./admin/components/customers/customer.module").then(module=>module.CustomerModule)},
-    {path:"products",loadChildren:()=>import("./admin/components/orders/order.module").then(module=>module.OrderModule)},
-    {path:"orders",loadChildren:()=>import("./admin/components/products/products.module").then(module=>module.ProductsModule)},
+    {path:"products",loadChildren:()=>import("./admin/components/products/products.module").then(module=>module.ProductsModule)},
+    {path:"orders",loadChildren:()=>import("./admin/components/orders/order.module").then(module=>module.OrderModule)},
     {path:"dashb",loadChildren:()=>import("./admin/components/products/products.module").then(module=>module.ProductsModule)},
   ]},
   {path:"",component:HomeComponent},

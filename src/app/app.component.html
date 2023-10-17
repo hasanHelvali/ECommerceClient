@@ -1,4 +1,22 @@
-<a routerLink="">Home</a> | <a routerLink="products">Products</a> | <a routerLink="basket">Basket</a> | <a routerLink="admin">Admin</a>
-<br>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <app-navbar></app-navbar>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <!-- <app-footer></app-footer> -->
+  </div>
+  <div class="col-md-2"></div>
+</div>
 
-<router-outlet></router-outlet>
