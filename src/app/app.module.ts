@@ -7,6 +7,7 @@ import { AdminModule } from './admin/admin.module';
 import { UiModule } from './ui/ui.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from './layout/layout.module';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { LayoutModule } from './layout/layout.module';
     AdminModule,
     UiModule,
     BrowserAnimationsModule,
-    LayoutModule
+    LayoutModule,
+    ToastrModule.forRoot()
 
   ],
   providers: [],
