@@ -11,6 +11,6 @@ export class AppComponent {
   title = 'ECommerceClient';
 
 }
-$(document).ready(()=>{
-  alert("Bu bir bildirimdir.")
-})
+// $(document).ready(()=>{
+//   alert("Bu bir bildirimdir.")
+// })
