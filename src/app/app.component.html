@@ -20,6 +20,11 @@
   <div class="col-md-2"></div>
 </div>
 
+<ngx-spinner type="ball-clip-rotate-multiple" size="default" name="spinner1"></ngx-spinner>
+<ngx-spinner type="ball-scale-multiple" size="default" name="spinner2"></ngx-spinner>
+<ngx-spinner type="line-spin-fade" size="default" name="spinner3"></ngx-spinner>
 
-
-<button class="btn btn-primary" (click)="m()">Tıkla</button>
+<!-- Buradaki bu spinner lari ana layout a yani buraya koydum. Buradan ekledigim icin uygulamada herhangi istedigim bir yerin ts kısmında inject edilen
+  spinner service in instance i uzerinden show fonksiyonunu cagırınca spinner yapısı kullanılabilir.
+Mesela admin klasorunun unn orders klasorunde ts de bir show islemi yaptıgımda ilgili spinner i gorurum. Cunku orders a gelindiginde router outlet ten dolayı
+aslında butun sayfalara buradaki spinner tag i gomulmus olur.     -->
