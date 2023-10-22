@@ -10,6 +10,7 @@ import { LayoutModule } from './layout/layout.module';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BaseComponent } from './base/base.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,10 +24,18 @@ import { BaseComponent } from './base/base.component';
     BrowserAnimationsModule,
     LayoutModule,
     ToastrModule.forRoot(),
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    HttpClientModule
 
   ],
-  providers: [],
+  providers: [
+    {provide:"baseUrl",useValue:"https://localhost:7113/api",multi:true}
+    /*Uygulamada kullanmam gereken bit baseUrl var. Bu baseUrl baska bir zaman degisebilir. Kullandıgım her yerde degismektense
+    bir merkezden bunu yonetmek istiyorum. Dolayısıyla bunu providers kısmına bu sekilde ekliyorum.
+    Bu url api ye istek gondermemiz icin ihtiyacımız olan url dir.
+    Bundan sonra yapmamız gereken operasyonları HttpClientService de yonetmemiz gerekecek.
+    Artık bu baseUrl i istedigimiz yerden DI ile cekebiliriz. */
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
