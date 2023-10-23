@@ -50,6 +50,8 @@ export class HttpClientService {
         url=requestParameters.fullEndPoint;
       else
         url=`${this.url(requestParameters)}`
+      console.log(url);
+
       return this.httpClient.post<T>(url,body,{headers:requestParameters.headers})
     }
 
