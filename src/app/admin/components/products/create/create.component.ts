@@ -25,8 +25,25 @@ export class CreateComponent extends BaseComponent{
     // createProduct.stock=parseInt(productStock.value); Bu sekilde de yapılabilirdi.
     createProduct.price=parseFloat(productPrice.value);
 
-    //Model olusturuldu. Service i cagıralım.
+    // if(!productName.value){
+    //   this.alertify.message("Lutfen Urun Adini Giriniz",
+    //   {dismissOthers:true,
+    //     messageType:MessageType.Error,
+    //     position:Position.TopRight
+    //   });
+    //   return
+    // }
+    // if(parseInt(productStock.value)<0){
+    //   this.alertify.message("Lutfen Stok Bilgisini Dogru Giriniz",
+    //   {dismissOthers:true,
+    //     messageType:MessageType.Error,
+    //     position:Position.TopRight
+    //   });
+    //   return;
+    // }
 
+
+    //Model olusturuldu. Service i cagıralım.
     this.productService.createProduct(createProduct,()=>{
       this.hideSpinner(SpinnerType.LineSpinFade)
       this.alertify.message("Urun Basarıyla Eklendi.",
@@ -34,6 +51,13 @@ export class CreateComponent extends BaseComponent{
         messageType:MessageType.Success,
         position:Position.TopRight
       })
+    },errorMessage=>{
+      this.alertify.message(errorMessage,{
+        dismissOthers:true,
+        messageType:MessageType.Error,
+        position:Position.TopRight
+      })
+
     })
 
   }
