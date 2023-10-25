@@ -1,5 +1,5 @@
 import { SplitInterpolation } from '@angular/compiler';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { NgxSpinner, NgxSpinnerService, Spinner } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { CreateProduct } from 'src/app/contracts/createProduct';
@@ -13,6 +13,8 @@ import { ProductService } from 'src/app/services/common/models/product.service';
 })
 export class CreateComponent extends BaseComponent{
 
+  @Output() createdProduct:EventEmitter<CreateProduct>=new EventEmitter();
+
   constructor(spinner:NgxSpinnerService , private productService:ProductService,private alertify:AlertifyService) {
     super(spinner);
   }
@@ -24,25 +26,6 @@ export class CreateComponent extends BaseComponent{
     createProduct.stock=+productStock.value;
     // createProduct.stock=parseInt(productStock.value); Bu sekilde de yapılabilirdi.
     createProduct.price=parseFloat(productPrice.value);
-
-    // if(!productName.value){
-    //   this.alertify.message("Lutfen Urun Adini Giriniz",
-    //   {dismissOthers:true,
-    //     messageType:MessageType.Error,
-    //     position:Position.TopRight
-    //   });
-    //   return
-    // }
-    // if(parseInt(productStock.value)<0){
-    //   this.alertify.message("Lutfen Stok Bilgisini Dogru Giriniz",
-    //   {dismissOthers:true,
-    //     messageType:MessageType.Error,
-    //     position:Position.TopRight
-    //   });
-    //   return;
-    // }
-
-
     //Model olusturuldu. Service i cagıralım.
     this.productService.createProduct(createProduct,()=>{
       this.hideSpinner(SpinnerType.LineSpinFade)
@@ -50,15 +33,14 @@ export class CreateComponent extends BaseComponent{
       {dismissOthers:true,
         messageType:MessageType.Success,
         position:Position.TopRight
-      })
+      });
+      this.createdProduct.emit(createProduct)
     },errorMessage=>{
       this.alertify.message(errorMessage,{
         dismissOthers:true,
         messageType:MessageType.Error,
         position:Position.TopRight
       })
-
-    })
-
+    });
   }
 }
