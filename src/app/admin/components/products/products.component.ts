@@ -19,6 +19,6 @@ export class ProductsComponent implements OnInit{
 
   @ViewChild(ListComponent) listComponent:ListComponent;
   createdProduct(createdProduct:CreateProduct){
-this.listComponent.getProducts();
+  this.listComponent.getProducts();
   }
 }
