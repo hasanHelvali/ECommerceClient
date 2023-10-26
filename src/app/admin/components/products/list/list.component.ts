@@ -8,6 +8,9 @@ import { AlertifyService, MessageType, Position } from 'src/app/services/admin/a
 import { HttpClientService } from 'src/app/services/common/http-client.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
+
+declare var $:any;//jquery talebi yapıldı.
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -36,11 +39,18 @@ export class ListComponent extends BaseComponent implements OnInit{
     this.paginator.length=allProducts.totalCount;
   }
 
-  displayedColumns: string[] = ['name', 'price', 'stock', 'createdDate','updatedDate'];
+  displayedColumns: string[] = ['name', 'price', 'stock', 'createdDate','updatedDate','edit','delete'];
   dataSource :MatTableDataSource<ListProduct>=null;
 
 
   async pageChange(){
     await this.getProducts();
   }
+
+
+  // public delete(id:string,event){
+  //   const img:HTMLImageElement=event.srcElement;
+  //   $(img.parentElement.parentElement.parentElement).fadeOut(1000);
+
+  // }
 }

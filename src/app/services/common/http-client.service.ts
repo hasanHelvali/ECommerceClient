@@ -37,9 +37,11 @@ export class HttpClientService {
       let url:string;
       if(requestParameters.fullEndPoint)
         url=requestParameters.fullEndPoint;
-      else
+      else{
         url=`${this.url(requestParameters)}${requestParameters.queryString ? `?${requestParameters.queryString}`:""}`
-      console.log(url);
+        url=url.replace("\n","");
+        url=url.replaceAll(" ","");
+      }
 
       return this.httpClient.post<T>(url,body,{headers:requestParameters.headers})
     }
@@ -48,8 +50,11 @@ export class HttpClientService {
       let url:string;
       if(requestParameters.fullEndPoint)
         url=requestParameters.fullEndPoint;
-      else
+      else{
         url=`${this.url(requestParameters)}${requestParameters.queryString ? `?${requestParameters.queryString}`:""}`
+        url=url.replace("\n","");
+        url=url.replaceAll(" ","");
+      }
       return this.httpClient.put<T>(url,body,{headers:requestParameters.headers})
     }
 
@@ -57,9 +62,13 @@ export class HttpClientService {
       let url:string
       if(requestParameters.fullEndPoint)
         url=requestParameters.fullEndPoint;
-      else
+      else{
         url=`${this.url(requestParameters)}/${id}${requestParameters.queryString ? `?${requestParameters.queryString}`:""}`
-      return this.httpClient.delete<T>(url,{headers:requestParameters.headers})
+        url=url.replace("\n","");
+        url=url.replaceAll(" ","");
+      }
+
+        return this.httpClient.delete<T>(url,{headers:requestParameters.headers})
 
     }
 }
