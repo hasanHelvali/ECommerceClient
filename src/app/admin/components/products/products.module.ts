@@ -12,12 +12,16 @@ import { FormsModule } from '@angular/forms';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { DeleteDirective } from 'src/app/directives/admin/delete.directive';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DeleteDialogComponent } from 'src/app/dialogs/delete-dialog/delete-dialog.component';
+
 @NgModule({
   declarations: [
     ProductsComponent,
     CreateComponent,
     ListComponent,
-    DeleteDirective
+    DeleteDirective,
+    DeleteDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +32,7 @@ import { DeleteDirective } from 'src/app/directives/admin/delete.directive';
     FormsModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDialogModule,
     RouterModule.forChild([
       {path:"",component:ProductsComponent}
     ])

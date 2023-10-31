@@ -44,8 +44,7 @@
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef> Delete </th>
       <td mat-cell *matCellDef="let element">
-        <a class="btn btn-outline-danger border-3" appDelete [id]="element.id" (callback)="getProducts()">
-          <!-- <img src="../../../../../assets/delete.png" alt="" width="25px" height="25px" (click)="delete(element.id,$event)"> -->
+        <a class="btn btn-outline-danger border-3" appDelete [id]="element.id" (callback)="getProducts()" controller="products">
         </a>
       </td>
     </ng-container>

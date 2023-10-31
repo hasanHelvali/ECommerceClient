@@ -5,7 +5,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { ListProduct } from 'src/app/contracts/listProduct';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
-import { HttpClientService } from 'src/app/services/common/http-client.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 
