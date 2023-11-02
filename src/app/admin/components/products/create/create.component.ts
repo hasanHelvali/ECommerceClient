@@ -4,6 +4,7 @@ import { NgxSpinner, NgxSpinnerService, Spinner } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { CreateProduct } from 'src/app/contracts/createProduct';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 @Component({
@@ -14,10 +15,18 @@ import { ProductService } from 'src/app/services/common/models/product.service';
 export class CreateComponent extends BaseComponent{
 
   @Output() createdProduct:EventEmitter<CreateProduct>=new EventEmitter();
+  @Output() fileUploadOptions:Partial<FileUploadOptions>={
+    action:"upload",
+    controller:"products",
+    explanation:"Resimleri Sürükleyin Veya Secin...",
+    isAdminPage:true,
+    accept:".png,.jpeg,.jpg,.json"
+  };
 
   constructor(spinner:NgxSpinnerService , private productService:ProductService,private alertify:AlertifyService) {
     super(spinner);
   }
+
 
   create(productName:HTMLInputElement,productStock:HTMLInputElement,productPrice:HTMLInputElement){
     this.showSpinner(SpinnerType.LineSpinFade);//Burada kayıt islemi suresince spinner i baslattık. Bunu service de uygun bir yerde durduracaz.
