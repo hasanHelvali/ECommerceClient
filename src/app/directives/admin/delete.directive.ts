@@ -48,11 +48,10 @@ export class DeleteDirective{
       data:DeleteState.Yes,
       afterClosed:async ()=>{
         this.spinner.show(SpinnerType.LineSpinFade);
-
-        const a:HTMLElement=this.element.nativeElement;
+        const a:HTMLTableCellElement=this.element.nativeElement;
         const td=a.parentElement.parentElement;
         // await this.productService.delete(this.id);
-        await this.httpClientService.delete({
+         this.httpClientService.delete({
           controller:this.controller,
         },this.id).subscribe(data=>{
           $(td).animate({

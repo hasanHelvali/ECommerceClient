@@ -4,7 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { ListProduct } from 'src/app/contracts/listProduct';
+import { SelectProductImageDialogComponent } from 'src/app/dialogs/select-product-image-dialog/select-product-image-dialog.component';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { DialogService } from 'src/app/services/common/dialog.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 
@@ -17,7 +19,12 @@ declare var $:any;//jquery talebi yapıldı.
 })
 export class ListComponent extends BaseComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
-  constructor(spinner:NgxSpinnerService,private productService:ProductService,private alertify:AlertifyService) {
+  constructor(
+    spinner:NgxSpinnerService,
+    private productService:ProductService,
+    private alertify:AlertifyService,
+    private dialogService:DialogService
+    ) {
     super(spinner);
   }
   async ngOnInit(){
@@ -38,7 +45,7 @@ export class ListComponent extends BaseComponent implements OnInit{
     this.paginator.length=allProducts.totalCount;
   }
 
-  displayedColumns: string[] = ['name', 'price', 'stock', 'createdDate','updatedDate','edit','delete'];
+  displayedColumns: string[] = ['name', 'price', 'stock', 'createdDate','updatedDate','photos','edit','delete'];
   dataSource :MatTableDataSource<ListProduct>=null;
 
 
@@ -46,10 +53,17 @@ export class ListComponent extends BaseComponent implements OnInit{
     await this.getProducts();
   }
 
+  addProductImages(id:string){
+    this.dialogService.openDialog({
+      componentType:SelectProductImageDialogComponent,
+      data:id,
+      options:{
+        width:"1400px"
+      }
 
-  // public delete(id:string,event){
-  //   const img:HTMLImageElement=event.srcElement;
-  //   $(img.parentElement.parentElement.parentElement).fadeOut(1000);
+    })
+  }
 
-  // }
+
+
 }
