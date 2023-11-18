@@ -4,6 +4,7 @@ import { CreateProduct } from 'src/app/contracts/createProduct';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ListProduct,  } from 'src/app/contracts/listProduct';
 import { Observable, firstValueFrom } from 'rxjs';
+import { ListProductImage } from 'src/app/contracts/list-product-image';
 
 @Injectable({
   providedIn: 'root'
@@ -12,22 +13,6 @@ export class ProductService {
 
   constructor(private httpClientService:HttpClientService) { }
 
-  // createProduct(product:CreateProduct,successCallBack?:any, errorCallBack?:any){
-  //   this.httpClientService.post({
-  //     controller:"products"
-  //   },product).subscribe( result=>{
-  //     successCallBack();
-  //   },(errorResponse:HttpErrorResponse)=>{
-  //     const _error:Array<{key:string,value:Array<string>}> = errorResponse.error;
-  //     let message="";
-  //     _error.forEach((val,index)=>{
-  //       val.value.forEach((_val,_index)=>{
-  //         message+=`${_val} <br>`;
-  //       });
-  //     });
-  //     errorCallBack(message);
-  //   });
-  // }
   createProduct(product:CreateProduct,successCallBack?:()=>void, errorCallBack?:(errorMessage:string)=>void){
     this.httpClientService.post({
       controller:"products"
@@ -70,6 +55,25 @@ export class ProductService {
     await firstValueFrom(deleteObservable);
   }
 
+  async readImages(id:string, successCallBack?:()=>void):Promise<ListProductImage[]>{
+    const getPicture:Observable<ListProductImage[]> = this.httpClientService.get<ListProductImage[]>({
+      action:"getproductimages",
+      controller:"products",
+    },id);
+    const images:ListProductImage[] = await firstValueFrom(getPicture);
+    successCallBack();
+    return images;
+  }
+
+  async deleteImage(id:string,imageId:string,successCallBack?:()=>void){
+    const deleteObservable = this.httpClientService.delete({
+      action:"deleteproductimage",
+      controller:"products",
+      queryString:`imageId=${imageId}`
+    },id);
+    await firstValueFrom(deleteObservable);
+    successCallBack();
+  }
 
 
 
