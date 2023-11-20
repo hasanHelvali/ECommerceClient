@@ -7,9 +7,6 @@ import { FileUploadDialogComponent } from 'src/app/dialogs/file-upload-dialog/fi
 import { MatDialogActions, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCommonModule } from '@angular/material/core';
-
-
-
 @NgModule({
   declarations: [
     FileUploadComponent,
@@ -20,6 +17,7 @@ import { MatCommonModule } from '@angular/material/core';
     NgxFileDropModule,
     MatButtonModule,
     MatDialogModule,
+    DialogModule
   ],
   exports:[FileUploadComponent]
 })

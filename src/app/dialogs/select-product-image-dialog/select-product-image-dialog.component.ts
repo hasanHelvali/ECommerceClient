@@ -38,7 +38,7 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
 
     this.images = await this.productService.readImages(this.data as string, ()=>this.spinner.hide(SpinnerType.LineSpinFade));
   }
-  @Output() options:Partial<FileUploadOptions>={
+  @Output() public options:Partial<FileUploadOptions>={
     accept:".png,.jpg,.jpeg,.gif",
     action:"upload",
     controller:"products",
