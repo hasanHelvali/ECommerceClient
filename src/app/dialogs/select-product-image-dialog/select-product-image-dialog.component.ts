@@ -31,8 +31,6 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
   }
 
   async ngOnInit(){
-    /*Component yuklenırken bir veri cekme islemi yapılmak istenirse bu genellıkle ctor da yapılmaz. Bu gibi islemleri bu sekilde life cycle event lerde
-    yapmak daha dogrudur.*/
 
     this.spinner.show(SpinnerType.LineSpinFade);
 
@@ -45,8 +43,6 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
     explanation:"Urün Resmini Seçin Veya Buraya Sürükleyin...",
     isAdminPage:true,
     queryString:`id=${this.data}`
-    // queryString:"id"+this.data, seklinde de yazılabilirdi.
-
   };
 
   async deleteImage(imageId:string,event:any){
@@ -58,7 +54,6 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
         await this.productService.deleteImage(this.data as string,imageId,()=>{
           this.spinner.hide(SpinnerType.LineSpinFade)
           var element=event;
-          // var card = $(event.srcElement).parent().parent().fadeOut(500)
           var card = $(event.srcElement).parent().parent();
           card.fadeOut(500);
         });

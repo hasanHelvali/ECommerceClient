@@ -8,9 +8,6 @@ import { BaseComponent } from 'src/app/base/base.component';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent extends BaseComponent {
-  /**
-   *
-   */
   constructor(spinner:NgxSpinnerService) {
     super(spinner);
 

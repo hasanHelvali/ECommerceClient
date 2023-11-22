@@ -1,0 +1,71 @@
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <form [formGroup]="frm" (ngSubmit)="onSubmit(frm.value)">
+      <div class="form-group">
+        <label for="nameSurname">Ad Soyad *</label>
+        <input type="text" formControlName="nameSurname" class="form-control" id="nameSurname" placeholder="Enter Name and Surname"
+        [ngClass]="{'is-invalid':submitted && component.nameSurname.errors}">
+        <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && component.nameSurname.errors?.required">
+          Lutfen Ad ve Soyad Bolumlerini Boş Geçmeyiniz!
+        </small>
+        <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && (component.nameSurname.errors?.maxlenght ||
+        component.nameSurname.errors?.minlength)">
+          Lutfen Ad ve Soyad 3-50 Karakter Arasında Giriniz!
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="userName">Kullanıcı Adı *</label>
+        <input type="text" formControlName="userName" class="form-control" id="userName" placeholder="Enter Email"
+        [ngClass]="{'is-invalid':submitted && component.userName.errors}">
+        <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && component.userName.errors?.required">
+          Lutfen Kullanıcı Adı Bölumünü Boş Geçmeyiniz!
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="telephone">Telefon *</label>
+        <input type="tel" formControlName="telephone" class="form-control" id="telephone" placeholder="Enter Email"
+        [ngClass]="{'is-invalid':submitted && component.telephone.errors}">
+        <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && component.telephone.errors?.required">
+          Lutfen Telefon Numarası Bölümünü Boş Geçmeyiniz!
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail">Email Address *</label>
+        <input type="email"  formControlName="email" id="inputEmail" class="form-control" placeholder="Enter Email"
+        [ngClass]="{'is-invalid':submitted && component.email.errors}">
+        <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && component.email.errors?.required">
+          Lutfen Email Bölumünü Boş Geçmeyiniz!
+        </small>
+        <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && component.email.errors?.email">
+          Lutfen Email Bölumünü Boş Geçmeyiniz!
+        </small>
+
+      </div>
+      <div class="form-group">
+        <label for="password">Şifre *</label>
+        <input type="password" id="password" class="form-control" placeholder="Password"  formControlName="password"
+        [ngClass]="{'is-invalid':submitted && component.pasword.errors}">
+        <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && component.password.errors?.required">
+          Lutfen Şifre Bolumlerini Boş Geçmeyiniz!
+        </small>
+
+      </div>
+      <div class="form-group">
+        <label for="againPassword">Şifre Tekrar *</label>
+        <input type="password" id="againPassword" class="form-control" placeholder="Enter Again Password"  formControlName="againPassword"
+        [ngClass]="{'is-invalid':submitted && component.againPassword.errors}">
+        <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && component.againPassword.errors?.required">
+          Lutfen Şifre Bolumlerini Boş Geçmeyiniz!
+        </small>
+        <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && frm.hasError('notSame')">
+          Lutfen Birbiri Ile Uyuşan Şifreler Giriniz!
+        </small>
+      </div>
+      <br>
+      <button type="submit" class="btn btn-primary">Kayıt Ol</button>
+    </form>
+  </div>
+  <div class="col-3"></div>
+</div>
+
