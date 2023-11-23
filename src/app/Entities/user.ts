@@ -4,5 +4,5 @@ export class User{
   telephone:string|number;
   email:string;
   password:string;
-  againPassword:string;
+  passwordConfirm:string;
 }

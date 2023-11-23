@@ -52,10 +52,10 @@
 
       </div>
       <div class="form-group">
-        <label for="againPassword">Şifre Tekrar *</label>
-        <input type="password" id="againPassword" class="form-control" placeholder="Enter Again Password"  formControlName="againPassword"
-        [ngClass]="{'is-invalid':submitted && component.againPassword.errors}">
-        <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && component.againPassword.errors?.required">
+        <label for="passwordConfirm">Şifre Tekrar *</label>
+        <input type="password" id="passwordConfirm" class="form-control" placeholder="Enter Again Password"  formControlName="passwordConfirm"
+        [ngClass]="{'is-invalid':submitted && component.passwordConfirm.errors}">
+        <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && component.passwordConfirm.errors?.required">
           Lutfen Şifre Bolumlerini Boş Geçmeyiniz!
         </small>
         <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && frm.hasError('notSame')">
