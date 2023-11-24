@@ -20,5 +20,6 @@ import { MatCommonModule } from '@angular/material/core';
     DialogModule
   ],
   exports:[FileUploadComponent]
+
 })
 export class FileUploadModule { }

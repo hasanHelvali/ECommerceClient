@@ -12,19 +12,17 @@ import { SpinnerType } from 'src/app/base/base.component';
 import {MatDialogActions} from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-file-upload',
+  selector: 'file-upload',
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })
 
 export class FileUploadComponent {
-  @Input() _options:Partial<FileUploadOptions>;
   constructor(private httpClientService:HttpClientService,private alertify:AlertifyService,private toastr:CustomToastrService,
     private dialog:MatDialog, private dialogService:DialogService, private spinner:NgxSpinnerService) {
-  }
-  public files: NgxFileDropEntry[];
-
-
+    }
+    public files: NgxFileDropEntry[];
+    @Input() options:Partial<FileUploadOptions>={};
   public selectedFiles(files: NgxFileDropEntry[]) {
     this.files = files;
     const fileData:FormData=new FormData();
@@ -39,14 +37,14 @@ export class FileUploadComponent {
       afterClosed:()=>{
         this.spinner.show(SpinnerType.LineSpinFade)
         this.httpClientService.post({
-        controller:this._options.controller,
-        action:this._options.action,
-        queryString:this._options.queryString,
+        controller:this.options.controller,
+        action:this.options.action,
+        queryString:this.options.queryString,
         headers:new HttpHeaders({"responseType":"blop"})
       },fileData).subscribe(data => {
         const message:string="Dosyalar Basari Ile Yuklenmistir"
         this.spinner.hide(SpinnerType.LineSpinFade)
-        if(this._options.isAdminPage){
+        if(this.options.isAdminPage){
           this.alertify.message(message,{
             dismissOthers:true,
             position:Position.TopRight,
@@ -61,7 +59,7 @@ export class FileUploadComponent {
       },(_errorResponse:HttpErrorResponse)=>{
         const message:string="Dosyalar Yuklenirken Bir Hata Olustu"
         this.spinner.hide(SpinnerType.LineSpinFade);
-        if(this._options.isAdminPage){
+        if(this.options.isAdminPage){
           this.alertify.message(message,{
             dismissOthers:true,
             position:Position.TopRight,

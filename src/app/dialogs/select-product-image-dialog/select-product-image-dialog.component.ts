@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { BaseDialog } from '../base/base-dialog';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { FileUploadOptions } from 'src/app/services/common/file-upload/file-upload.component';
@@ -36,7 +36,7 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
 
     this.images = await this.productService.readImages(this.data as string, ()=>this.spinner.hide(SpinnerType.LineSpinFade));
   }
-  @Output() public options:Partial<FileUploadOptions>={
+  @Output() options:Partial<FileUploadOptions>={
     accept:".png,.jpg,.jpeg,.gif",
     action:"upload",
     controller:"products",
@@ -44,6 +44,7 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
     isAdminPage:true,
     queryString:`id=${this.data}`
   };
+  // @Output() myevent: EventEmitter<any> = new EventEmitter();
 
   async deleteImage(imageId:string,event:any){
     this.dialogService.openDialog({

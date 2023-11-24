@@ -9,6 +9,8 @@ import { LayoutModule } from './layout/layout.module';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
+import { FileUploadModule } from './services/common/file-upload/file-upload.module';
+import { DialogModule } from '@angular/cdk/dialog';
 
 @NgModule({
   declarations: [
@@ -24,6 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     ToastrModule.forRoot(),
     NgxSpinnerModule,
     HttpClientModule,
+    FileUploadModule,
+    DialogModule//---
   ],
   providers: [
     {provide:"baseUrl",useValue:"https://localhost:7113/api",multi:true}
