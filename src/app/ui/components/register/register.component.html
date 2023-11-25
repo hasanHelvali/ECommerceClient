@@ -45,7 +45,7 @@
       <div class="form-group">
         <label for="password">Şifre *</label>
         <input type="password" id="password" class="form-control" placeholder="Password"  formControlName="password"
-        [ngClass]="{'is-invalid':submitted && component.pasword.errors}">
+        [ngClass]="{'is-invalid':submitted && component.password.errors}">
         <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && component.password.errors?.required">
           Lutfen Şifre Bolumlerini Boş Geçmeyiniz!
         </small>
