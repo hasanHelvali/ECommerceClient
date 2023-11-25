@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+      <div class="form-group">
+        <label for="userName">Kullanıcı Adı *</label>
+        <input #txtUserNameOrEmail type="text" class="form-control" id="userName" placeholder="Enter User Name or Email">
+        <small  class="form-text text-muted invalid-feedback">***</small>
+      </div>
+      <div class="form-group">
+        <label for="password">Şifre *</label>
+        <input #txtPassword type="password" id="password" class="form-control" placeholder="Password">
+      </div>
+      <br>
+      <button type="" class="btn btn-primary d-flex m-auto" (click)="login(txtUserNameOrEmail.value,txtPassword.value)">Login</button>
+  </div>
+  <div class="col-3"></div>
+</div>
+

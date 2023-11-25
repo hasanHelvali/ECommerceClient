@@ -20,4 +20,15 @@ export class UserService {
 
     return await firstValueFrom(observable) as CreateUser;
   }
+
+
+  async login(userNameOrEmail:string, password:string,callBackFunc?:()=>void):Promise<void>{
+    const observable:Observable<any> = this.httpClient.post({
+      controller:"users",
+      action:"login"
+    },{userNameOrEmail,password});
+
+    await firstValueFrom(observable);
+    callBackFunc();
+  }
 }

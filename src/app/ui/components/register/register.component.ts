@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/Entities/user';
+import { BaseComponent } from 'src/app/base/base.component';
 import { CreateUser } from 'src/app/contracts/user/createUser';
 import { MessageType, Position } from 'src/app/services/admin/alertify.service';
 import { UserService } from 'src/app/services/common/models/user.service';
@@ -12,10 +14,13 @@ import { CustomToastrService, ToastrMessageType, ToastrOptions, ToastrPosition }
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit{
+export class RegisterComponent extends BaseComponent implements OnInit {
   frm:FormGroup;
-  constructor(private formBuilder:FormBuilder,private userService:UserService,private toastrService:CustomToastrService) {
-
+  constructor(private formBuilder:FormBuilder,
+    private userService:UserService,
+    private toastrService:CustomToastrService,
+    spinner:NgxSpinnerService) {
+    super(spinner);
   }
   ngOnInit(): void {
     var v=Validators;
@@ -92,6 +97,7 @@ export class RegisterComponent implements OnInit{
         position:ToastrPosition.TopRight
       });
   }
+
 
 
 

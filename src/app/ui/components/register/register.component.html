@@ -16,7 +16,7 @@
       </div>
       <div class="form-group">
         <label for="userName">Kullanıcı Adı *</label>
-        <input type="text" formControlName="userName" class="form-control" id="userName" placeholder="Enter Email"
+        <input type="text" formControlName="userName" class="form-control" id="userName" placeholder="Enter User Name"
         [ngClass]="{'is-invalid':submitted && component.userName.errors}">
         <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && component.userName.errors?.required">
           Lutfen Kullanıcı Adı Bölumünü Boş Geçmeyiniz!
@@ -24,7 +24,7 @@
       </div>
       <div class="form-group">
         <label for="telephone">Telefon *</label>
-        <input type="tel" formControlName="telephone" class="form-control" id="telephone" placeholder="Enter Email"
+        <input type="tel" formControlName="telephone" class="form-control" id="telephone" placeholder="Enter Telepthone Number"
         [ngClass]="{'is-invalid':submitted && component.telephone.errors}">
         <small  class="form-text text-muted invalid-feedback" *ngIf="submitted && component.telephone.errors?.required">
           Lutfen Telefon Numarası Bölümünü Boş Geçmeyiniz!
