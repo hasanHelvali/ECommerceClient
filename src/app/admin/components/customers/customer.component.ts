@@ -16,6 +16,6 @@ export class CustomerComponent extends BaseComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.showSpinner(SpinnerType.LineSpinFade)
+    // this.showSpinner(SpinnerType.LineSpinFade)
   }
 }

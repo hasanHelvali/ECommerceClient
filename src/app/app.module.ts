@@ -11,6 +11,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from './services/common/file-upload/file-upload.module';
 import { DialogModule } from '@angular/cdk/dialog';
+import { JwtModule } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,19 @@ import { DialogModule } from '@angular/cdk/dialog';
     NgxSpinnerModule,
     HttpClientModule,
     FileUploadModule,
-    DialogModule//---
+    JwtModule.forRoot({
+      config:{
+        tokenGetter:()=>localStorage.getItem("accessToken"),
+        //Butun isteklerde bu token header a yerlestirilir. Araya interceptor olarak eklenir.
+        allowedDomains:["localhost:7113","localhost:5113"],
+        /*bir jwt ile rastgele bir api ye istek atılması cok tehlikeli bir durumdur. Ilgili konumda bu jwt elde edilirse saldırgan bu arayuzde bircok
+        yere erisebilir. Bu yuzden ilgili hedef endpoint lerin belirlenmesi gerekir. Bunun icin ilgili kutuphanede allowedDomains adında bir alan
+        bize sunulmustur.*/
+        // disallowedRoutes hatta ozellikle gonderilmemesi gereken endpoint ler varsa onları da burada belirleyebiliyoruz.
+
+      }
+    })
+
   ],
   providers: [
     {provide:"baseUrl",useValue:"https://localhost:7113/api",multi:true}
