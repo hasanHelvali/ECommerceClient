@@ -1,8 +1,12 @@
+import { SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { User } from 'src/app/Entities/user';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
+import { TokenResponse } from 'src/app/contracts/token/tokenResponse';
 import { AuthService } from 'src/app/services/common/auth.service';
+import { HttpClientService } from 'src/app/services/common/http-client.service';
 import { UserService } from 'src/app/services/common/models/user.service';
 
 @Component({
@@ -13,8 +17,15 @@ import { UserService } from 'src/app/services/common/models/user.service';
 export class LoginComponent extends BaseComponent {
 
   constructor(private userService:UserService,spinner:NgxSpinnerService,private authService:AuthService,
-    private activatedRoute:ActivatedRoute,private router:Router) {
+    private activatedRoute:ActivatedRoute,private router:Router, private socialAuthService:SocialAuthService) {
     super(spinner);
+    socialAuthService.authState.subscribe(async (user:SocialUser)=>{
+      this.showSpinner(SpinnerType.LineSpinFade);
+      await userService.googleLogin(user,()=>{
+        this.authService.identityChech();        
+        this.hideSpinner(SpinnerType.LineSpinFade);
+      });
+    });
   }
   async login(userNameOrEmail:string,password:string){
     this.showSpinner(SpinnerType.LineSpinFade);
@@ -32,4 +43,7 @@ export class LoginComponent extends BaseComponent {
    });
 
   }
+
+
+
 }

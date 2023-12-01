@@ -15,13 +15,13 @@ import { ProductService } from 'src/app/services/common/models/product.service';
 export class CreateComponent extends BaseComponent{
 
   @Output() createdProduct:EventEmitter<CreateProduct>=new EventEmitter();
-  // @Output() fileUploadOptions:Partial<FileUploadOptions>={
-  //   action:"upload",
-  //   controller:"products",
-  //   explanation:"Resimleri Sürükleyin Veya Secin...",
-  //   isAdminPage:true,
-  //   accept:".png,.jpeg,.jpg,.json"
-  // };
+  @Output() fileUploadOptions:Partial<FileUploadOptions>={
+    action:"upload",
+    controller:"products",
+    explanation:"Resimleri Sürükleyin Veya Secin...",
+    isAdminPage:true,
+    accept:".png,.jpeg,.jpg,.json"
+  };
 
   constructor(spinner:NgxSpinnerService , private productService:ProductService,private alertify:AlertifyService) {
     super(spinner);

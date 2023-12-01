@@ -39,13 +39,13 @@ export class RegisterComponent extends BaseComponent implements OnInit {
           v.minLength(3)
         ]
       ],
-      telephone:["",
-        [
-          v.required,
-          v.maxLength(10),
-          v.minLength(10),
-        ]
-      ],
+      // telephone:["",
+      //   [
+      //     v.required,
+      //     v.maxLength(10),
+      //     v.minLength(10),
+      //   ]
+      // ],
       email:["",
         [
           v.required,
@@ -82,8 +82,10 @@ export class RegisterComponent extends BaseComponent implements OnInit {
   async onSubmit(user:User){
     this.submitted=true;
     if(this.frm.invalid)
-      return ;
+      return ;0
+    debugger
     const result : CreateUser = await this.userService.create(user)
+    debugger
     if(result.succeeded)
       this.toastrService.message(result.message,"Kullanıcı Kaydı Başarılı",
       {

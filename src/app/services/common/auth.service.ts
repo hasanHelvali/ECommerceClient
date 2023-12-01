@@ -22,7 +22,7 @@ export class AuthService {
     _isAuthenticated=token!=null && !expired;
   }
   get isAuthenticated():boolean{
-    return this.isAuthenticated;
+    return _isAuthenticated;
   }
 }
 

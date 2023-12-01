@@ -12,16 +12,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from './services/common/file-upload/file-upload.module';
 import { DialogModule } from '@angular/cdk/dialog';
 import { JwtModule } from '@auth0/angular-jwt';
+import { LoginComponent } from './ui/components/login/login.component';
+import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AdminModule,
-    UiModule,
     BrowserAnimationsModule,
     LayoutModule,
     ToastrModule.forRoot(),
@@ -31,24 +33,38 @@ import { JwtModule } from '@auth0/angular-jwt';
     JwtModule.forRoot({
       config:{
         tokenGetter:()=>localStorage.getItem("accessToken"),
-        //Butun isteklerde bu token header a yerlestirilir. Araya interceptor olarak eklenir.
-        allowedDomains:["localhost:7113","localhost:5113"],
-        /*bir jwt ile rastgele bir api ye istek atılması cok tehlikeli bir durumdur. Ilgili konumda bu jwt elde edilirse saldırgan bu arayuzde bircok
-        yere erisebilir. Bu yuzden ilgili hedef endpoint lerin belirlenmesi gerekir. Bunun icin ilgili kutuphanede allowedDomains adında bir alan
-        bize sunulmustur.*/
-        // disallowedRoutes hatta ozellikle gonderilmemesi gereken endpoint ler varsa onları da burada belirleyebiliyoruz.
-
+        allowedDomains:["localhost:7113"],
+        
+        
       }
-    })
+    }),
+    SocialLoginModule,
+    GoogleSigninButtonModule ,
 
   ],
   providers: [
-    {provide:"baseUrl",useValue:"https://localhost:7113/api",multi:true}
-    /*Uygulamada kullanmam gereken bit baseUrl var. Bu baseUrl baska bir zaman degisebilir. Kullandıgım her yerde degismektense
-    bir merkezden bunu yonetmek istiyorum. Dolayısıyla bunu providers kısmına bu sekilde ekliyorum.
-    Bu url api ye istek gondermemiz icin ihtiyacımız olan url dir.
-    Bundan sonra yapmamız gereken operasyonları HttpClientService de yonetmemiz gerekecek.
-    Artık bu baseUrl i istedigimiz yerden DI ile cekebiliriz. */
+    {provide:"baseUrl",useValue:"https://localhost:7113/api",multi:true},
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '958479602575-v6j54rnag5khs34cmgfgpf2q3kulpnv8.apps.googleusercontent.com'
+            )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider('')
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
   ],
   bootstrap: [AppComponent]
 })

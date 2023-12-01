@@ -41,50 +41,45 @@ export class FileUploadComponent {
         action:this.options.action,
         queryString:this.options.queryString,
         headers:new HttpHeaders({"responseType":"blop"})
-      },fileData).subscribe(data => {
-        const message:string="Dosyalar Basari Ile Yuklenmistir"
-        this.spinner.hide(SpinnerType.LineSpinFade)
-        if(this.options.isAdminPage){
-          this.alertify.message(message,{
-            dismissOthers:true,
-            position:Position.TopRight,
-            messageType:MessageType.Success
-          });
-        }else{
-          this.toastr.message(message,"Basarili",{
-            messageType:ToastrMessageType.Success,
-            position:ToastrPosition.TopRight
-          })
-        }
-      },(_errorResponse:HttpErrorResponse)=>{
-        const message:string="Dosyalar Yuklenirken Bir Hata Olustu"
-        this.spinner.hide(SpinnerType.LineSpinFade);
-        if(this.options.isAdminPage){
-          this.alertify.message(message,{
-            dismissOthers:true,
-            position:Position.TopRight,
-            messageType:MessageType.Error
-          });
-        }else{
-          this.toastr.message(message,"Basarisiz",{
-            messageType:ToastrMessageType.Error,
-            position:ToastrPosition.TopRight
-          })
-        }
-      });
+      },fileData).subscribe({
+          next(data) {
+            const message:string="Dosyalar Basari Ile Yuklenmistir"
+          this.spinner.hide(SpinnerType.LineSpinFade)
+          if(this.options.isAdminPage){
+            this.alertify.message(message,{
+              dismissOthers:true,
+              position:Position.TopRight,
+              messageType:MessageType.Success
+            });
+          }else{
+            this.toastr.message(message,"Basarili",{
+              messageType:ToastrMessageType.Success,
+              position:ToastrPosition.TopRight
+            })}},
+        error(_errorResponse:HttpErrorResponse) {
+          const message:string="Dosyalar Yuklenirken Bir Hata Olustu"
+            this.spinner.hide(SpinnerType.LineSpinFade);
+            if(this.options.isAdminPage){
+              this.alertify.message(message,{
+                dismissOthers:true,
+                position:Position.TopRight,
+                messageType:MessageType.Error
+              });}else{
+              this.toastr.message(message,"Basarisiz",{messageType:ToastrMessageType.Error,position:ToastrPosition.TopRight})}}
+        })
+      }
+    })
+
+        
+      }
     }
-  });
-}
-}
 
-
-
-export class FileUploadOptions{
-  controller?:string;
-  action?:string;
-  queryString:string;
-  explanation?:string;
-  accept?:string;
-  isAdminPage:boolean=false;
-
-}
+      export class FileUploadOptions{
+        controller?:string;
+        action?:string;
+        queryString:string;
+        explanation?:string;
+        accept?:string;
+        isAdminPage:boolean=false;
+      }
+      

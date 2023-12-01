@@ -11,6 +11,9 @@
         <input #txtPassword type="password" id="password" class="form-control" placeholder="Password">
       </div>
       <br>
+      <!-- <div asl-google-signin-button type='icon' size='medium'></div> -->
+      <asl-google-signin-button type='standard' size='medium'></asl-google-signin-button>
+      <br>
       <button type="" class="btn btn-primary d-flex m-auto" (click)="login(txtUserNameOrEmail.value,txtPassword.value)">Login</button>
   </div>
   <div class="col-3"></div>

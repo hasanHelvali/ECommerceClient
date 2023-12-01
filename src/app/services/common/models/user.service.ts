@@ -6,6 +6,8 @@ import { Observable, firstValueFrom } from 'rxjs';
 import { Token } from '../../../contracts/token/token';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../ui/custom-toastr.service';
 import { TokenResponse } from 'src/app/contracts/token/tokenResponse';
+import { SocialUser } from '@abacritt/angularx-social-login';
+import { MessageType } from '../../admin/alertify.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +24,13 @@ export class UserService {
     bir createUser bekler. Lakin ben User gonderip bir CerateUser almak istiyorum. Bu sebeple CreateUser|User seklinde bir tur tanimi yaptım. */
 
     return await firstValueFrom(observable) as CreateUser;
+
+    //Promise kodlarda duzenlemeler yapılacak.
   }
 
 
   async login(userNameOrEmail:string, password:string,callBackFunc?:()=>void):Promise<any>{
-    const observable:Observable<any|TokenResponse> = this.httpClient.post<any|TokenResponse>({
+    const observable:Observable<any|TokenResponse> = await this.httpClient.post<any|TokenResponse>({
       controller:"users",
       action:"login"
     },{userNameOrEmail,password});
@@ -41,5 +45,22 @@ export class UserService {
     }
 
     callBackFunc();
+  }
+
+  async googleLogin(user:SocialUser,callBackFunc?:()=>void):Promise<any>{
+    const observable:Observable<SocialUser | TokenResponse> = this.httpClient.post<SocialUser | TokenResponse>({
+      action:"google-login",
+      controller:"users",
+    },user);
+    const tokenResponse:TokenResponse = await firstValueFrom(observable) as TokenResponse;
+    if (tokenResponse) {
+      localStorage.setItem("accessToken",tokenResponse.token.accessToken);
+      this.toastrService.message("Google Üzerinden Giriş İşleminiz Başarı İle Sağlanmıştır.","Giriş Başarılı",{
+        messageType:ToastrMessageType.Success,
+        position:ToastrPosition.BottomRight
+      });
+    }
+    callBackFunc();
+
   }
 }
