@@ -29,38 +29,5 @@ export class UserService {
   }
 
 
-  async login(userNameOrEmail:string, password:string,callBackFunc?:()=>void):Promise<any>{
-    const observable:Observable<any|TokenResponse> = await this.httpClient.post<any|TokenResponse>({
-      controller:"users",
-      action:"login"
-    },{userNameOrEmail,password});
 
-    const tokenResponse : TokenResponse = await firstValueFrom(observable) as TokenResponse;
-    if(tokenResponse){
-      localStorage.setItem("accessToken",tokenResponse.token.accessToken);//localstorage a yani tarayıcı bellegine boyle bir deger ekledım.
-      this.toastrService.message("Kullanıcı Girişi Bşarılı Bir Şekilde Sağlanmıştır.","Giriş Başarılı",{
-      messageType:ToastrMessageType.Success,
-      position:ToastrPosition.TopRight
-      })
-    }
-
-    callBackFunc();
-  }
-
-  async googleLogin(user:SocialUser,callBackFunc?:()=>void):Promise<any>{
-    const observable:Observable<SocialUser | TokenResponse> = this.httpClient.post<SocialUser | TokenResponse>({
-      action:"google-login",
-      controller:"users",
-    },user);
-    const tokenResponse:TokenResponse = await firstValueFrom(observable) as TokenResponse;
-    if (tokenResponse) {
-      localStorage.setItem("accessToken",tokenResponse.token.accessToken);
-      this.toastrService.message("Google Üzerinden Giriş İşleminiz Başarı İle Sağlanmıştır.","Giriş Başarılı",{
-        messageType:ToastrMessageType.Success,
-        position:ToastrPosition.BottomRight
-      });
-    }
-    callBackFunc();
-
-  }
 }

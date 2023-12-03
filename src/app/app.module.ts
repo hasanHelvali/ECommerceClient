@@ -55,10 +55,10 @@ import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, S
               '958479602575-v6j54rnag5khs34cmgfgpf2q3kulpnv8.apps.googleusercontent.com'
             )
           },
-          {
-            id: FacebookLoginProvider.PROVIDER_ID,
-            provider: new FacebookLoginProvider('')
-          }
+          // {
+          //   id: FacebookLoginProvider.PROVIDER_ID,
+          //   provider: new FacebookLoginProvider('')
+          // } //Benim uygulamam da facebook login yok.
         ],
         onError: (err) => {
           console.error(err);

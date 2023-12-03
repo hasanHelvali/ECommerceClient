@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, Validators }
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { User } from 'src/app/Entities/user';
-import { BaseComponent } from 'src/app/base/base.component';
+import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { CreateUser } from 'src/app/contracts/user/createUser';
 import { MessageType, Position } from 'src/app/services/admin/alertify.service';
 import { UserService } from 'src/app/services/common/models/user.service';
@@ -78,26 +78,28 @@ export class RegisterComponent extends BaseComponent implements OnInit {
   get component(){
     return this.frm.controls;
   }
-
   async onSubmit(user:User){
+    this.showSpinner(SpinnerType.LineSpinFade);
     this.submitted=true;
     if(this.frm.invalid)
       return ;0
-    debugger
     const result : CreateUser = await this.userService.create(user)
-    debugger
-    if(result.succeeded)
+    if(result.succeeded){
+      this.hideSpinner(SpinnerType.LineSpinFade);
       this.toastrService.message(result.message,"Kullanıcı Kaydı Başarılı",
       {
         messageType:ToastrMessageType.Success,
         position:ToastrPosition.TopRight
       });
-    else
+    }
+    else{
+      this.hideSpinner(SpinnerType.LineSpinFade);
       this.toastrService.message(result.message,"Kullanıcı Kaydı Yapılamadı",
       {
         messageType:ToastrMessageType.Error,
         position:ToastrPosition.TopRight
       });
+    }
   }
 
 
