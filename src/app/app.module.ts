@@ -8,12 +8,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LayoutModule } from './layout/layout.module';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from './services/common/file-upload/file-upload.module';
 import { DialogModule } from '@angular/cdk/dialog';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginComponent } from './ui/components/login/login.component';
 import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,11 @@ import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, S
           console.error(err);
         }
       } as SocialAuthServiceConfig,
-    }
+    },
+    {provide:HTTP_INTERCEPTORS, useClass:HttpErrorHandlerInterceptorService, multi:true}
+    /*Burada HttpInterceptors provider ina karsılık  kendi olusturdugumuz HttpErrorHandlerInterceptorService sınıfını veriyoruz.
+    Bunun disinda bu miamride birden fazla interceptor kullanılmasını istiyorsak eger multi property sini true ya cekiyoruz.
+    Tum bu islemler sonucunda yapılan butun Http isteklerini sonucunda bu interceptor devreye girecektir.  */
   ],
   bootstrap: [AppComponent]
 })
