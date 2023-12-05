@@ -12,25 +12,18 @@ import {
   ToastrMessageType,
   ToastrPosition,
 } from '../ui/custom-toastr.service';
-
+import { UserAuthService } from './models/user-auth.service';
 @Injectable({
   providedIn: 'root',
 })
 export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
-  //Herhangi bir yapının bir HttpInterceptor olabilmesi icin HttpInterceptor interface inden implemmente edilmesi gerekir.
-
-  constructor(private toastr: CustomToastrService) {}
+  constructor(private toastr: CustomToastrService,private userAuthService:UserAuthService) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    //Yapılacak isteklerde araya girdigimiz zaman bu fonksiyon tetiklenecektir.
-    //req yapılan istektir. next ise araya girdikten sonra devam etmemizi saglayacak nesnedir.
-    //next bir Handler yani bir delegate tir. Araya girdikten sonra ilgili fonksiyonu temsil etmektedir. Bu bize araya girmeden sonra ilgili devamlılıgı saglar.
-
     return next.handle(req).pipe(
       catchError((error) => {
-        // console.log(error);//backend i kapatıp error a sebebiyet verdik. Yakalanan error u console a yazdırdık. Error un status gibi bazı field larının oldugunu gorduk.
         switch (error.status) {
           case HttpStatusCode.Unauthorized:
             this.toastr.message(
@@ -41,6 +34,9 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
                 position: ToastrPosition.BottomFullWidth,
               }
             );
+            this.userAuthService.refreshTokenLogin(localStorage.getItem("refreshToken")).then(data=>{
+              
+            });
             break;
           case HttpStatusCode.InternalServerError:
             this.toastr.message(
@@ -87,13 +83,5 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
         return of(error);
       })
     );
-    /*Oncelikle aldıgın request i next et yani direkt olarak api ye push la demis olduk. Bununla beraber iligli handle fonskiyonu biz bir Observable dondugu icin 
-    pipe la ilgili operatorleri tetiklemek isityoruz. catchError bir rxjs fonksiyonudur. Arada bir hata olursa bunu bize geri dondurur. 
-    error la iceri girip iligli hatayı of ile bir Observable akısına alıyoruz. Bu hatayı return ettik.
-     */
   }
-  //Bu interceptor i mimariye vermemiz gerekir. Aksı halde bosuna yazmis oluruz. Uygulamanın ana module une gidelim.
-
-  /*Uygulamada her Http surecinde hata olsun olmasın bu interceptor devreye girer. Bu yuzden intercept fonksiyonu icinde herhangi bir islem her istekte calıstırılır.
-  Hata durumlarında da hatalar zaten bu ozellik sebebiyle yakalanırlar. */
 }
