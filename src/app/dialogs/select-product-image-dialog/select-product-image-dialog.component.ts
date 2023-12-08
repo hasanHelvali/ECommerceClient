@@ -61,6 +61,12 @@ export class SelectProductImageDialogComponent extends BaseDialog<SelectProductI
       }
     })
   }
+  showCase(imageId:string){
+    this.spinner.show(SpinnerType.LineSpinFade);
+    this.productService.changeShowCaseImage(imageId,this.data as string,()=>{
+      this.spinner.hide(SpinnerType.LineSpinFade)
+    });
+  }
 }
 
 export enum SelectProductImageState{

@@ -15,6 +15,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { LoginComponent } from './ui/components/login/login.component';
 import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -31,17 +32,15 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     NgxSpinnerModule,
     HttpClientModule,
     FileUploadModule,
+    DialogModule,
     JwtModule.forRoot({
       config:{
         tokenGetter:()=>localStorage.getItem("accessToken"),
         allowedDomains:["localhost:7113"],
-        
-        
       }
     }),
     SocialLoginModule,
     GoogleSigninButtonModule ,
-
   ],
   providers: [
     {provide:"baseUrl",useValue:"https://localhost:7113/api",multi:true},
@@ -56,10 +55,6 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
               '958479602575-v6j54rnag5khs34cmgfgpf2q3kulpnv8.apps.googleusercontent.com'
             )
           },
-          // {
-          //   id: FacebookLoginProvider.PROVIDER_ID,
-          //   provider: new FacebookLoginProvider('')
-          // } //Benim uygulamam da facebook login yok.
         ],
         onError: (err) => {
           console.error(err);
@@ -67,9 +62,6 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
       } as SocialAuthServiceConfig,
     },
     {provide:HTTP_INTERCEPTORS, useClass:HttpErrorHandlerInterceptorService, multi:true}
-    /*Burada HttpInterceptors provider ina karsılık  kendi olusturdugumuz HttpErrorHandlerInterceptorService sınıfını veriyoruz.
-    Bunun disinda bu miamride birden fazla interceptor kullanılmasını istiyorsak eger multi property sini true ya cekiyoruz.
-    Tum bu islemler sonucunda yapılan butun Http isteklerini sonucunda bu interceptor devreye girecektir.  */
   ],
   bootstrap: [AppComponent]
 })

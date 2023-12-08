@@ -33,7 +33,7 @@ export class ListComponent extends BaseComponent implements OnInit{
 
  async getProducts(){
     this.showSpinner(SpinnerType.LineSpinFade);
-    const allProducts:{totalCount:number; products:ListProduct[]} = await  this.productService.read(
+    const allProducts:{totalProductCount:number; products:ListProduct[]} = await  this.productService.read(
       this.paginator ? this.paginator.pageIndex : 0,
       this.paginator? this.paginator.pageSize : 5,
       ()=>this.hideSpinner(SpinnerType.LineSpinFade),
@@ -42,7 +42,7 @@ export class ListComponent extends BaseComponent implements OnInit{
       position:Position.TopRight
     }))
     this.dataSource=new MatTableDataSource<ListProduct>(allProducts.products)
-    this.paginator.length=allProducts.totalCount;
+    this.paginator.length=allProducts.totalProductCount;
   }
 
   displayedColumns: string[] = ['name', 'price', 'stock', 'createdDate','updatedDate','photos','edit','delete'];
