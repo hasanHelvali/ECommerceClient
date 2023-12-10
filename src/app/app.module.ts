@@ -41,6 +41,7 @@ import { FormsModule } from '@angular/forms';
     }),
     SocialLoginModule,
     GoogleSigninButtonModule ,
+    
   ],
   providers: [
     {provide:"baseUrl",useValue:"https://localhost:7113/api",multi:true},

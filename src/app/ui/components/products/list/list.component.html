@@ -1,12 +1,14 @@
 <div class="row">
     <div class="card" style="width: 18rem; float: left; margin: 5px;" 
     *ngFor="let product of products">
-        <img width="250" height="250" *ngIf="!product.productImageFiles.length" class="card-img-top" src="../../../../../assets/default-product-image.jpg" alt="Card image cap">
-        <img width="250" height="250" *ngIf="product.productImageFiles.length" class="card-img-top" src="{{baseUrl.url}}/{{product.imagePath}}" alt="Card image cap">
+        <!-- <img width="250" height="250" *ngIf="!product.productImageFiles.length" class="card-img-top" src="../../../../../assets/default-product-image.jpg" alt="Card image cap"> -->
+        <img width="250" height="250" *ngIf="product.productImageFiles" class="card-img-top" src="../../../../../assets/default-product-image.jpg" alt="Card image cap">
+        <!-- <img width="250" height="250" *ngIf="!product.productImageFiles.length" class="card-img-top" src="{{baseUrl.url}}/{{product.imagePath}}" alt="Card image cap"> -->
+        <img width="250" height="250" *ngIf="product.productImageFiles" class="card-img-top" src="{{baseUrl.url}}/{{product.imagePath}}" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">{{product.name}}</h5>
             <p class="card-text">Fiyat : {{product.price|currency:'₺'}} <br> Stok : {{product.stock}}</p>
-            <a href="#" class="btn btn-success">Sepete Ekle</a>
+            <a class="btn btn-success" (click)="addToBasket(product)">Sepete Ekle</a>
         </div>
     </div>
 </div>

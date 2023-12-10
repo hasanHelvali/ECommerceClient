@@ -13,11 +13,19 @@ import {
   ToastrPosition,
 } from '../ui/custom-toastr.service';
 import { UserAuthService } from './models/user-auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { SpinnerType } from 'src/app/base/base.component';
 @Injectable({
   providedIn: 'root',
 })
 export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
-  constructor(private toastr: CustomToastrService,private userAuthService:UserAuthService) {}
+  constructor(
+    private toastr: CustomToastrService,
+    private userAuthService: UserAuthService,
+    private router: Router,
+    private spinner: NgxSpinnerService
+  ) {}
   intercept(
     req: HttpRequest<any>,
     next: HttpHandler
@@ -26,17 +34,34 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
       catchError((error) => {
         switch (error.status) {
           case HttpStatusCode.Unauthorized:
-            this.toastr.message(
-              'Bu İşlemi Yapmaya Yetkiniz Bulunammaktadır.',
-              'Yetkisiz İşlem',
-              {
-                messageType: ToastrMessageType.Warning,
-                position: ToastrPosition.BottomFullWidth,
-              }
-            );
-            this.userAuthService.refreshTokenLogin(localStorage.getItem("refreshToken")).then(data=>{
-              
-            });
+            this.userAuthService
+              .refreshTokenLogin(
+                localStorage.getItem('refreshToken'),
+                (state) => {
+                  if (!state) {
+                    const url = this.router.url;
+                    if (url == '/products')
+                      this.toastr.message(
+                        'Sepete Ürün Eklemek İçin Oturum Açmanız Gerekiyor',
+                        'Oturum Açınız',
+                        {
+                          messageType: ToastrMessageType.Warning,
+                          position: ToastrPosition.TopRight,
+                        }
+                      );
+                    else
+                      this.toastr.message(
+                        'Bu İşlemi Yapmaya Yetkiniz Bulunammaktadır.',
+                        'Yetkisiz İşlem',
+                        {
+                          messageType: ToastrMessageType.Warning,
+                          position: ToastrPosition.BottomFullWidth,
+                        }
+                      );
+                  }
+                }
+              )
+              .then((data) => {});
             break;
           case HttpStatusCode.InternalServerError:
             this.toastr.message(
@@ -49,24 +74,16 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
             );
             break;
           case HttpStatusCode.BadRequest:
-            this.toastr.message(
-              'Geçersiz İstek Yapıldı.',
-              'Geçersiz İstek',
-              {
-                messageType: ToastrMessageType.Warning,
-                position: ToastrPosition.BottomFullWidth,
-              }
-            );
+            this.toastr.message('Geçersiz İstek Yapıldı.', 'Geçersiz İstek', {
+              messageType: ToastrMessageType.Warning,
+              position: ToastrPosition.BottomFullWidth,
+            });
             break;
           case HttpStatusCode.NotFound:
-            this.toastr.message(
-              'Sayfa Bulunamadı.',
-              'Sayfa Bulunamadı',
-              {
-                messageType: ToastrMessageType.Warning,
-                position: ToastrPosition.BottomFullWidth,
-              }
-            );
+            this.toastr.message('Sayfa Bulunamadı.', 'Sayfa Bulunamadı', {
+              messageType: ToastrMessageType.Warning,
+              position: ToastrPosition.BottomFullWidth,
+            });
             break;
           default:
             this.toastr.message(
@@ -77,9 +94,10 @@ export class HttpErrorHandlerInterceptorService implements HttpInterceptor {
                 position: ToastrPosition.BottomFullWidth,
               }
             );
-            
+
             break;
         }
+        this.spinner.hide(SpinnerType.LineSpinFade);
         return of(error);
       })
     );

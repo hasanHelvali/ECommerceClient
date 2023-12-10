@@ -12,6 +12,7 @@ import { RegisterModule } from './register/register.module';
     HomeModule,
     ProductsModule,
     RegisterModule,
-  ]
+  ],
+  exports:[BasketsModule]
 })
 export class ComponentsModule { }
