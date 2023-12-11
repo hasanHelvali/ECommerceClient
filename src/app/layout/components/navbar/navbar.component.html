@@ -1,41 +1,108 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="">
     <a class="navbar-brand" routerLink="">Mini E-Commerce</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link btn btn-outline-success" aria-current="page" routerLink="">Ana Sayfa</a>
+          <a
+            class="nav-link btn btn-outline-success"
+            aria-current="page"
+            routerLink=""
+            >Ana Sayfa</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link btn btn-outline-success" aria-current="page" routerLink="products">Ürünler</a>
+          <a
+            class="nav-link btn btn-outline-success"
+            aria-current="page"
+            routerLink="products"
+            >Ürünler</a
+          >
         </li>
         <!-- <li class="nav-item">
           <a class="nav-link btn btn-outline-success" aria-current="page" routerLink="basket">Sepet</a>
         </li> -->
         <li class="nav-item">
-          <a class="nav-link btn btn-outline-success" aria-current="page" routerLink="register"
-          *ngIf="!authService.isAuthenticated">Kayıt Ol</a>
+          <a
+            class="nav-link btn btn-outline-success"
+            aria-current="page"
+            routerLink="register"
+            *ngIf="!authService.isAuthenticated"
+            >Kayıt Ol</a
+          >
         </li>
         <li class="nav-item">
-          <a class="nav-link  btn btn-outline-success" aria-current="page" routerLink="login"
-          *ngIf="!authService.isAuthenticated">Giriş Yap</a>
+          <a
+            class="nav-link btn btn-outline-success"
+            aria-current="page"
+            routerLink="login"
+            *ngIf="!authService.isAuthenticated"
+            >Giriş Yap</a
+          >
         </li>
         <li>
-          <a class="btn btn-outline-danger"(click)="signOut()" style="cursor: pointer; color: red;" *ngIf="authService.isAuthenticated">Cıkış Yap</a>
-          </li>
+          <a
+            class="btn btn-outline-danger"
+            (click)="signOut()"
+            style="cursor: pointer; color: red"
+            *ngIf="authService.isAuthenticated"
+            >Cıkış Yap</a
+          >
+        </li>
         <li>
-          <a class="btn btn-outline-success" routerLink="/admin"
-          *ngIf="authService.isAuthenticated">Yönetim Paneli</a>
-          </li>
-        </ul>
-        <div class="">
-          <button class=" btn btn-outline-success" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Sepet</button>
-        </div>
+          <a
+            class="btn btn-outline-success"
+            routerLink="/admin"
+            *ngIf="authService.isAuthenticated"
+            >Yönetim Paneli</a
+          >
+        </li>
+      </ul>
+      <div class="">
+        <button
+          class="btn btn-outline-success"
+          type="button"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          (click)="loadComponent()"
+        >
+          Sepet
+        </button>
       </div>
+    </div>
   </div>
 </nav>
 
-<app-baskets></app-baskets>
+<!-- <app-baskets></app-baskets> -->
+<!-- Artık static olarak bu yukleme islemini yapmak istemiyoruz. Bunu bir evente baglayarak ilgili service aracılıgıyla dinamik olarak yukletmeyi planlıyorum.
+Bunun icin ise ngTemplate den faydalanacaz. Ayrıca bu ngtemplate i bir directive ile isaretlememiz gerekiyor. Bunun icin de dynamicLoadComponent adında bir
+ directive olusturdum.-->
+
+<!-- <ng-template [ngTemplateOutlet]="outlet" [ngOutletContext]="context"></ng-template> -->
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl" role="document">
+    <ng-template appDynamicLoadComponent></ng-template>
+  </div>
+</div>
+
+
+<!-- Buradaki ilk 2 div i baskets dan buraya aldık cunku program hata veriyordu. Bu Gencay Yıldız Hoca nın kendi buldugu bir cozum. -->

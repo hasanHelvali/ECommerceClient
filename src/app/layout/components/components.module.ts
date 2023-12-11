@@ -4,13 +4,16 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { UiModule } from 'src/app/ui/ui.module';
+import { DynamicLoadComponentDirective } from 'src/app/directives/common/dynamic-load-component.directive';
 
 
 
 @NgModule({
   declarations: [
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    DynamicLoadComponentDirective
+     
   ],
   imports: [
     RouterModule,

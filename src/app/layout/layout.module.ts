@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ComponentsModule } from './components/components.module';
+import { DynamicLoadComponentDirective } from '../directives/common/dynamic-load-component.directive';
 
 
 
@@ -8,8 +9,7 @@ import { ComponentsModule } from './components/components.module';
   declarations: [],
   imports: [
     CommonModule,
-    ComponentsModule
-    
+    ComponentsModule,
   ],
   exports:[ComponentsModule]
 
