@@ -8,7 +8,6 @@ import { BaseDialog } from '../base/base-dialog';
   styleUrls: ['./delete-dialog.component.scss']
 })
 export class DeleteDialogComponent extends BaseDialog<DeleteDialogComponent> {
-  public declare MatDialogClose;
   constructor( dialogRef: MatDialogRef<DeleteDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DeleteState,) {
     super(dialogRef);

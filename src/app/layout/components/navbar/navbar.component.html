@@ -30,9 +30,6 @@
             >Ürünler</a
           >
         </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link btn btn-outline-success" aria-current="page" routerLink="basket">Sepet</a>
-        </li> -->
         <li class="nav-item">
           <a
             class="nav-link btn btn-outline-success"
@@ -74,7 +71,7 @@
           class="btn btn-outline-success"
           type="button"
           data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+          data-bs-target="#basketModal"
           (click)="loadComponent()"
         >
           Sepet
@@ -83,26 +80,13 @@
     </div>
   </div>
 </nav>
-
-<!-- <app-baskets></app-baskets> -->
-<!-- Artık static olarak bu yukleme islemini yapmak istemiyoruz. Bunu bir evente baglayarak ilgili service aracılıgıyla dinamik olarak yukletmeyi planlıyorum.
-Bunun icin ise ngTemplate den faydalanacaz. Ayrıca bu ngtemplate i bir directive ile isaretlememiz gerekiyor. Bunun icin de dynamicLoadComponent adında bir
- directive olusturdum.-->
-
-<!-- <ng-template [ngTemplateOutlet]="outlet" [ngOutletContext]="context"></ng-template> -->
-
 <div
   class="modal fade"
-  id="exampleModal"
+  id="basketModal"
   tabindex="-1"
   role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
 >
   <div class="modal-dialog modal-xl" role="document">
     <ng-template appDynamicLoadComponent></ng-template>
   </div>
 </div>
-
-
-<!-- Buradaki ilk 2 div i baskets dan buraya aldık cunku program hata veriyordu. Bu Gencay Yıldız Hoca nın kendi buldugu bir cozum. -->

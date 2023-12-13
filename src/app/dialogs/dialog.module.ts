@@ -8,10 +8,14 @@ import { FileUploadModule } from '../services/common/file-upload/file-upload.mod
 import {MatCardModule} from '@angular/material/card';
 import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/compiler';
 import { FormsModule } from '@angular/forms';
+import { BasketItemRemoveDialogComponent } from './basket-item-remove-dialog/basket-item-remove-dialog.component';
+import { ShoppingCompleteDialogComponent } from './shopping-complete-dialog/shopping-complete-dialog.component';
 @NgModule({
   declarations: [
     DeleteDialogComponent,
     SelectProductImageDialogComponent,
+    BasketItemRemoveDialogComponent,
+    ShoppingCompleteDialogComponent,
   ],
   imports: [
     MatButtonModule,
