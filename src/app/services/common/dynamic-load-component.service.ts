@@ -6,7 +6,9 @@ import { BaseComponent } from 'src/app/base/base.component';
 })
 export class DynamicLoadComponentService {
 
-  constructor(private componentFactoryResolver:ComponentFactoryResolver) { }
+  // constructor(private componentFactoryResolver:ComponentFactoryResolver) { }
+  //Igili sınıf deprecated edilmistir. Bu sınıfa ıhtıyac duymadan DynamicLoadComponent yapılabilmektedir.
+  constructor() { }
 
  async  laodComponent(component:ComponentType,viewContainerRef:ViewContainerRef){
     let _component:any=null;
@@ -17,22 +19,10 @@ export class DynamicLoadComponentService {
     }
 
     viewContainerRef.clear();
-    return viewContainerRef.createComponent(this.componentFactoryResolver.resolveComponentFactory(_component));
-    /*Ilgili compoenent i al. Ilgili referanslar ile coz. Bu cozulen yapıyı create et yani cogalt ve bize ver demis olduk.
-    
-    ViewContianerRef: Dinamik olarak yuklenecek olan component i iceirsinde barındıran contianer dir.
-    Burada onemli olan nokta ise her dinamik yukleme surecinde onceki view leri clear etmemiz gerekir. Etmezsek de bazen calısabilir lakin etmekte fayda vardir.
-    
-    ComponentFactory: Compoennt lerin instance larini olusturmak icin kullanılann bir fabrika sınıfıdır. 
-
-    ComponentFactoryResolver: Belirli bir component icin ComponentFactory yi resolveComponentFactory fonksiyonu ile resolve eden ve geriye bir 
-    ComponentFactory nesnesi donen bir sınıftır.
-    
-    Tu bu yapılanmalar ile biz istediigmiz component i istedigimiz bir event te kullanabiliriz.
-    */
-
-
-
+    // return viewContainerRef.createComponent(this.componentFactoryResolver.resolveComponentFactory(_component));
+    //Deprecated isleminden dolayı artık ilgili sınıf kullanılmıyor.    
+    return viewContainerRef.createComponent(_component);
+    //Bu sekilde yeterlidir.
   }
 
 }

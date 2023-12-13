@@ -13,10 +13,8 @@ import { FileUploadModule } from './services/common/file-upload/file-upload.modu
 import { DialogModule } from '@angular/cdk/dialog';
 import { JwtModule } from '@auth0/angular-jwt';
 import { LoginComponent } from './ui/components/login/login.component';
-import { FacebookLoginProvider, GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import {  GoogleLoginProvider, GoogleSigninButtonModule, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { HttpErrorHandlerInterceptorService } from './services/common/http-error-handler-interceptor.service';
-import { FormsModule } from '@angular/forms';
-import { DynamicLoadComponentDirective } from './directives/common/dynamic-load-component.directive';
 
 @NgModule({
   declarations: [
@@ -45,7 +43,8 @@ import { DynamicLoadComponentDirective } from './directives/common/dynamic-load-
     
   ],
   providers: [
-    {provide:"baseUrl",useValue:"https://localhost:7113/api",multi:true},
+    {provide:"baseUrl",useValue:"https://localhost:7113/api/",multi:true},
+    {provide:"baseSignalRUrl",useValue:"https://localhost:7113/",multi:true},
     {
       provide: 'SocialAuthServiceConfig',
       useValue: {
