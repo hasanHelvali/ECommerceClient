@@ -10,6 +10,11 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/compiler';
 import { FormsModule } from '@angular/forms';
 import { BasketItemRemoveDialogComponent } from './basket-item-remove-dialog/basket-item-remove-dialog.component';
 import { ShoppingCompleteDialogComponent } from './shopping-complete-dialog/shopping-complete-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     DeleteDialogComponent,
@@ -23,6 +28,14 @@ import { ShoppingCompleteDialogComponent } from './shopping-complete-dialog/shop
     MatDialogModule,
     MatButtonModule,
     MatCardModule,
+    FileUploadModule,
+    MatSidenavModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatDialogModule,
     FileUploadModule,
   ],
   // exports:[SelectProductImageDialogComponent,DeleteDialogComponent]

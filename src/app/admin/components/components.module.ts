@@ -4,6 +4,7 @@ import { CustomerModule } from './customers/customer.module';
 import { ProductsModule } from './products/products.module';
 import { OrderModule } from './orders/order.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { DeleteDirectiveModule } from 'src/app/directives/admin/delete.direcitve.module';
 
 
 
@@ -14,7 +15,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
     CustomerModule,
     ProductsModule,
     OrderModule,
-    DashboardModule
+    DashboardModule,
   ]
 })
 export class ComponentsModule { }

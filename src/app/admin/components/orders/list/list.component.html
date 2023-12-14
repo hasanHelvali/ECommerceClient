@@ -1,0 +1,48 @@
+<p>list works!</p>
+<div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource">
+      <!-- name Column -->
+      <ng-container matColumnDef="orderCode">
+        <th mat-header-cell *matHeaderCellDef> Order Code </th>
+        <td mat-cell *matCellDef="let element"> {{element.orderCode}} </td>
+      </ng-container>
+  
+      <!-- price Column -->
+      <ng-container matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef> UserName </th>
+        <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+      </ng-container>
+  
+      <!-- stock Column -->
+      <ng-container matColumnDef="totalPrice">
+        <th mat-header-cell *matHeaderCellDef> Total Price </th>
+        <td mat-cell *matCellDef="let element"> {{element.totalPrice}} </td>
+      </ng-container>
+  
+      <!-- createdDate Column -->
+      <ng-container matColumnDef="createdDate">
+        <th mat-header-cell *matHeaderCellDef> Created Date </th>
+        <td mat-cell *matCellDef="let element"> {{element.createdDate}} </td>
+      </ng-container>
+  
+          <!-- delete Column -->
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef width="30"> Delete </th>
+        <!-- <td mat-cell *matCellDef="let element">
+          <a class="btn btn-outline-danger border-3" appDelete [id]="element.id" (callback)="getOrders()" controller="orders">
+          </a>
+        </td> -->
+        <td mat-cell *matCellDef="let element"  appDelete [id]="element.id" (callback)="getOrders()" controller="orders">
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator (page)="pageChange()" [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of periodic elements">
+    </mat-paginator>
+  </div>
+  

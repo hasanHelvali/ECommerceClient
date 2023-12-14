@@ -45,7 +45,7 @@ export class ListComponent extends BaseComponent implements OnInit{
     this.paginator.length=allProducts.totalProductCount;
   }
 
-  displayedColumns: string[] = ['name', 'price', 'stock', 'createdDate','updatedDate','photos','edit','delete'];
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate','updatedDate','photos','edit','delete'];
   dataSource :MatTableDataSource<ListProduct>=null;
 
 
