@@ -4,7 +4,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { ListOrder } from 'src/app/contracts/order/list-order';
+import { OrderDetailDialogComponent, OrderDetailDialogState } from 'src/app/dialogs/order-detail-dialog/order-detail-dialog.component';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
+import { DialogService } from 'src/app/services/common/dialog.service';
 import { OrderService } from 'src/app/services/common/models/order.service';
 
 @Component({
@@ -18,13 +20,14 @@ export class ListComponent extends BaseComponent {
     spinner:NgxSpinnerService,
     private orderService:OrderService,
     private alertify:AlertifyService,
+    private dialogService:DialogService
     ) {
     super(spinner);
   }
   async ngOnInit(){
     await this.getOrders();
   }
-  displayedColumns: string[] = ['orderCode', 'userName', 'totalPrice', 'createdDate','delete'];
+  displayedColumns: string[] = ['orderCode', 'userName', 'totalPrice', 'createdDate','viewDetail','delete'];
   dataSource :MatTableDataSource<ListOrder>=null;
 
  async getOrders(){
@@ -42,5 +45,15 @@ export class ListComponent extends BaseComponent {
   }
   async pageChange(){
     await this.getOrders();
+  }
+  showDetail(id:string){
+    this.dialogService.openDialog({
+      componentType:OrderDetailDialogComponent,
+      data:id,
+      options:{
+        width:"750px",
+        
+      }
+    })
   }
 }

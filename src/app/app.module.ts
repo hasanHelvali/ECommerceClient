@@ -43,7 +43,7 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
     
   ],
   providers: [
-    {provide:"baseUrl",useValue:"https://localhost:7113/api/",multi:true},
+    {provide:"baseUrl",useValue:"https://localhost:7113/api",multi:true},
     {provide:"baseSignalRUrl",useValue:"https://localhost:7113/",multi:true},
     {
       provide: 'SocialAuthServiceConfig',

@@ -17,10 +17,10 @@ export class BasketService {
     return await firstValueFrom(observable);
   }
 
-  async add(basketItem: CreateBasketItem): Promise<void> {
+  async add(basketItem: CreateBasketItem) :Promise<void>{
     const observable: Observable<any> = this.httpClient.post(
       {
-        controller: 'baskets',
+        controller: 'baskets'
       },
       basketItem
     );
