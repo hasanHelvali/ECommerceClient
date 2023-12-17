@@ -14,7 +14,8 @@
       <!-- <div asl-google-signin-button type='icon' size='medium'></div> -->
       <asl-google-signin-button type='standard' size='medium'></asl-google-signin-button>
       <br>
-      <button type="" class="btn btn-primary d-flex m-auto" (click)="login(txtUserNameOrEmail.value,txtPassword.value)">Login</button>
+      <button type="submit" class="btn btn-primary d-flex m-auto" style="margin-top: 5px;" (click)="login(txtUserNameOrEmail.value,txtPassword.value)">Login</button>
+      <a class="btn btn-secondary d-flex m-auto" style="margin-top: 5px; margin-left: 5px;" routerLink="/password-reset">Şifremi Unuttum</a>
   </div>
   <div class="col-3"></div>
 </div>
