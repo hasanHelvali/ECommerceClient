@@ -27,7 +27,7 @@ export class ListComponent extends BaseComponent {
   async ngOnInit(){
     await this.getOrders();
   }
-  displayedColumns: string[] = ['orderCode', 'userName', 'totalPrice', 'createdDate','viewDetail','delete'];
+  displayedColumns: string[] = ['orderCode', 'userName', 'totalPrice', 'createdDate','completed','viewDetail','delete'];
   dataSource :MatTableDataSource<ListOrder>=null;
 
  async getOrders(){

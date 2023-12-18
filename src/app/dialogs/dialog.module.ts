@@ -17,6 +17,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
 import { OrderDetailDialogComponent } from './order-detail-dialog/order-detail-dialog.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { CompleteOrderDialogComponent } from './complete-order-dialog/complete-order-dialog.component';
 @NgModule({
   declarations: [
     DeleteDialogComponent,
@@ -24,6 +25,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     BasketItemRemoveDialogComponent,
     ShoppingCompleteDialogComponent,
     OrderDetailDialogComponent,
+    CompleteOrderDialogComponent,
   ],
   imports: [
     MatButtonModule,

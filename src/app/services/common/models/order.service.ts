@@ -4,6 +4,7 @@ import { CreateOrder } from 'src/app/contracts/order/create-order';
 import { Observable, firstValueFrom } from 'rxjs';
 import { ListOrder } from 'src/app/contracts/order/list-order';
 import { SingleOrder } from 'src/app/contracts/order/single-order';
+import { platformBrowser } from '@angular/platform-browser';
 
 @Injectable({
   providedIn: 'root',
@@ -57,5 +58,13 @@ export class OrderService {
       .then((value) => succesCallBack())
       .catch((err) => errorCallBack(err));
     return await promiseData;
+  }
+
+  async  completeOrder(id:string){
+    const observable:Observable<any>=this.httpClient.get({
+      controller:"orders",
+      action:"complete-order"
+    },id);
+    await firstValueFrom(observable);
   }
 }
