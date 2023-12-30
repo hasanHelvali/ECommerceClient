@@ -10,14 +10,15 @@ import { DialogService } from 'src/app/services/common/dialog.service';
 import { ProductService } from 'src/app/services/common/models/product.service';
 
 
-declare var $:any;//jquery talebi yapıldı.
-
+declare var $:any;
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends BaseComponent implements OnInit{
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate','updatedDate','photos','edit','delete'];
+  dataSource :MatTableDataSource<ListProduct>=null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
     spinner:NgxSpinnerService,
@@ -45,8 +46,7 @@ export class ListComponent extends BaseComponent implements OnInit{
     this.paginator.length=allProducts.totalProductCount;
   }
 
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate','updatedDate','photos','edit','delete'];
-  dataSource :MatTableDataSource<ListProduct>=null;
+
 
 
   async pageChange(){

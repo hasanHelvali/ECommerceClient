@@ -32,7 +32,7 @@
 
     <!-- photos icon -->
     <ng-container matColumnDef="photos">
-      <th mat-header-cell *matHeaderCellDef> Edit </th>
+      <th mat-header-cell *matHeaderCellDef width="30"> Edit </th>
       <td mat-cell *matCellDef="let element">
         <a  class="btn btn-outline-warning border-3">
           <img src="../../../../../assets/photos.png" width="25px" height="25px" style="cursor: pointer;"
@@ -43,20 +43,14 @@
 
     <!-- edit Column -->
     <ng-container matColumnDef="edit">
-      <th mat-header-cell *matHeaderCellDef> Edit </th>
+      <th mat-header-cell *matHeaderCellDef width="30"> Edit </th>
       <td mat-cell *matCellDef="let element">
-        <a  class="btn btn-outline-warning border-3">
           <img src="../../../../../assets/edit.png" width="25px" height="25px" style="cursor: pointer;">
-        </a>
-      </td><
+      </td>
     </ng-container>
         <!-- delete Column -->
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef> Delete </th>
-      <!-- <td mat-cell *matCellDef="let element ">
-        <a class="btn btn-outline-danger border-3" appDelete [id]="element.id" (callback)="getProducts()" controller="products">
-        </a>
-      </td> -->
       <td mat-cell *matCellDef="let element" appDelete [id]="element.id" (callback)="getProducts()" controller="products">
       </td>
     </ng-container>

@@ -14,6 +14,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { CompleteOrderDialogComponent } from './complete-order-dialog/complete-order-dialog.component';
 import { AuthorizeMenuDialogComponent } from './authorize-menu-dialog/authorize-menu-dialog.component';
 import {MatBadgeModule} from '@angular/material/badge'; 
+import { MatOptionModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     DeleteDialogComponent,
@@ -32,7 +33,8 @@ import {MatBadgeModule} from '@angular/material/badge';
     FileUploadModule,
     MatTableModule,
     MatToolbarModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatOptionModule
   ],
 })
 export class DialogModule { }

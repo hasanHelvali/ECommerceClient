@@ -21,13 +21,12 @@ export class DeleteDirective{
   constructor(
     private element:ElementRef,
     private renderer:Renderer2,
-    // private productService:ProductService,
     private httpClientService:HttpClientService,
     private spinner:NgxSpinnerService,
     public dialog:MatDialog,
     private alertify:AlertifyService,
     private dialogService:DialogService) {
-      const image=renderer.createElement("img");//Bir image nesnesi olusturuldu.
+      const image=renderer.createElement("img");
     image.setAttribute("src","../../../../../assets/delete.png");
     image.setAttribute("style","cursor:pointer")
     image.width=25;
@@ -42,7 +41,7 @@ export class DeleteDirective{
    @Output() callback:EventEmitter<any>= new EventEmitter();
 
    @HostListener("click")
-   onClick(){
+   async onClick(){
     this.dialogService.openDialog({
       componentType:DeleteDialogComponent,
       data:DeleteState.Yes,
@@ -54,13 +53,14 @@ export class DeleteDirective{
          this.httpClientService.delete({
           controller:this.controller,
         },this.id).subscribe(data=>{
-          $(td).animate({
+          // $(td.parseElement).animate({
+            $(td).animate({
             opacity:0,
             left:"+=50",
             height:"toogle"
           },700,()=>{
             this.callback.emit();
-            this.alertify.message("Ürün Başariyla Silinmiştir",{
+            this.alertify.message(`${this.controller=='roles'? 'Rol':'Ürün '} Başariyla Silinmiştir`,{
               dismissOthers:true,
               messageType:MessageType.Success,
               position:Position.TopRight
