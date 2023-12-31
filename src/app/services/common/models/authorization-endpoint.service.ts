@@ -37,7 +37,7 @@ export class AuthorizationEndpointService {
     menu: string,
     successCallBack?: () => void,
     errorCallBack?: (error) => void
-  ) {
+  ):Promise<string[]> {
     const observable: Observable<any> = this.httpClientService.post(
       {
         controller: 'AuthorizationEndpoints',

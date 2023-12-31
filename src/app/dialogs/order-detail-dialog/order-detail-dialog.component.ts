@@ -10,7 +10,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerType } from 'src/app/base/base.component';
 import { AlertifyService } from 'src/app/services/admin/alertify.service';
 import { CustomToastrService, ToastrMessageType, ToastrPosition } from 'src/app/services/ui/custom-toastr.service';
-
+import {MatTableModule} from '@angular/material/table';
 @Component({
   selector: 'app-order-detail-dialog',
   templateUrl: './order-detail-dialog.component.html',

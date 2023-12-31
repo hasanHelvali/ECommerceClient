@@ -13,6 +13,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FileUploadModule } from 'src/app/services/common/file-upload/file-upload.module';
 import { DeleteDirectiveModule } from 'src/app/directives/admin/delete.direcitve.module';
+import { DialogModule } from '@angular/cdk/dialog';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { DeleteDirectiveModule } from 'src/app/directives/admin/delete.direcitve
   ],
   imports: [
     CommonModule,
+    DialogModule,
     MatSidenavModule,
     MatFormFieldModule,
     MatInputModule,

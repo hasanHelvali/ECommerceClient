@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OrderComponent } from './order.component';
-import { RouterModule } from '@angular/router';
+import { UserComponent } from './user.component';
 import { ListComponent } from './list/list.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -10,22 +9,20 @@ import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatTableModule } from '@angular/material/table';
-import { DeleteDirective } from 'src/app/directives/admin/delete.directive';
 import { DeleteDirectiveModule } from 'src/app/directives/admin/delete.direcitve.module';
 import { DialogModule } from '@angular/cdk/dialog';
+import { RouterModule } from '@angular/router';
 
 
 
 @NgModule({
   declarations: [
-    OrderComponent,
-    ListComponent,
+    UserComponent,
+    ListComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild([
-      {path:"",component:OrderComponent}
-    ]),
+    DialogModule,
     MatSidenavModule,
     MatFormFieldModule,
     MatInputModule,
@@ -33,7 +30,9 @@ import { DialogModule } from '@angular/cdk/dialog';
     MatTableModule,
     MatPaginatorModule,
     DeleteDirectiveModule,
-    DialogModule
+    RouterModule.forChild([
+      {path:"",component:UserComponent}
+    ])
   ]
 })
-export class OrderModule { }
+export class UserModule { }

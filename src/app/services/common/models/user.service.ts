@@ -8,6 +8,7 @@ import { CustomToastrService, ToastrMessageType, ToastrPosition } from '../../ui
 import { TokenResponse } from 'src/app/contracts/token/tokenResponse';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { MessageType } from '../../admin/alertify.service';
+import { ListUser } from 'src/app/contracts/user/listUser';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +44,56 @@ export class UserService {
     await promiseData;
 
   }
+  async getAllUsers(
+    page: number = 0,
+    size: number = 5,
+    succesCallBack?: () => void,
+    errorCallBack?: (errorMessage: string) => void
+  ): Promise<{ totalUsersCount: number; users: ListUser[] }> {
+    const observable: Observable<{
+      totalUsersCount: number;
+      users: ListUser[];
+    }> = this.httpClient.get({
+      controller: 'users',
+      queryString: `page=${page}&size=${size}`,
+    });
+    const promiseData = firstValueFrom(observable);
+    promiseData
+      .then((value) => succesCallBack())
+      .catch((err) => errorCallBack(err));
+    return await promiseData;
+  }
 
+  async assignRoleToUser(
+    id:string,
+    roles:string[],
+    successCallBack?: () => void,
+    errorCallBack?: (error) => void
+  ) {
+    const observable: Observable<any> = this.httpClient.post(
+      {
+        controller: 'users',
+        action:"assign-role-to-user"
+      },
+      {
+        userId:id,
+        roles: roles,
+      }
+    );
+    const promiseData = firstValueFrom(observable)
+    promiseData.then(()=>successCallBack()).catch((error)=>errorCallBack(error));
+    await promiseData;
+  }
+
+  async getRolesToUser(userId:string,successCallBack?: () => void, errorCallBack?: (error) => void):Promise<string[]>{
+    const observable:Observable<{userRoles:string[]}>=this.httpClient.get({
+      controller:"users",
+      action:"get-roles-to-user"
+    },userId);
+
+    const promiseData=firstValueFrom(observable);
+    promiseData.then(()=>successCallBack()).catch(error=>errorCallBack(error));
+    return (await promiseData).userRoles;
+  }
 
 }
