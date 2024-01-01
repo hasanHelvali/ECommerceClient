@@ -36,10 +36,13 @@ export class ListComponent extends BaseComponent {
       this.paginator ? this.paginator.pageIndex : 0,
       this.paginator? this.paginator.pageSize : 5,
       ()=>this.hideSpinner(SpinnerType.LineSpinFade),
-      errorMessage=>this.alertify.message(errorMessage,{
-      messageType:MessageType.Error,
-      position:Position.TopRight
-    }))
+      (errorMessage:any)=>{
+        this.alertify.message(errorMessage.message,{
+          dismissOthers:true,
+          messageType:MessageType.Error,
+          position:Position.TopRight
+        });
+      });
     this.dataSource=new MatTableDataSource<ListOrder>(allOrders.orders)
     this.paginator.length=allOrders.totalOrderCount;
   }
