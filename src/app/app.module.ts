@@ -18,7 +18,7 @@ import { HttpErrorHandlerInterceptorService } from './services/common/http-error
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

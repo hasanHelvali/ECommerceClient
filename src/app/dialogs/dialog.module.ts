@@ -19,7 +19,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { CdkTableModule } from '@angular/cdk/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatToolbarModule} from '@angular/material/toolbar';
-import { AuthorizeUserDialogComponent } from './authorize-user-dialog/authorize-user-dialog.component'; 
+import { AuthorizeUserDialogComponent } from './authorize-user-dialog/authorize-user-dialog.component';
+import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component'; 
 @NgModule({
   declarations: [
     DeleteDialogComponent,
@@ -30,6 +31,7 @@ import { AuthorizeUserDialogComponent } from './authorize-user-dialog/authorize-
     CompleteOrderDialogComponent,
     AuthorizeMenuDialogComponent,
     AuthorizeUserDialogComponent,
+    QrcodeDialogComponent,
   ],
   imports: [
     MatTableModule,

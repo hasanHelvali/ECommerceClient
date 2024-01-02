@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { BaseComponent, SpinnerType } from 'src/app/base/base.component';
 import { ListProduct } from 'src/app/contracts/listProduct';
+import { QrcodeDialogComponent } from 'src/app/dialogs/qrcode-dialog/qrcode-dialog.component';
 import { SelectProductImageDialogComponent } from 'src/app/dialogs/select-product-image-dialog/select-product-image-dialog.component';
 import { AlertifyService, MessageType, Position } from 'src/app/services/admin/alertify.service';
 import { DialogService } from 'src/app/services/common/dialog.service';
@@ -17,7 +18,7 @@ declare var $:any;
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent extends BaseComponent implements OnInit{
-  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate','updatedDate','photos','edit','delete'];
+  displayedColumns: string[] = ['name', 'stock', 'price', 'createdDate','updatedDate','photos','qrcode','edit','delete'];
   dataSource :MatTableDataSource<ListProduct>=null;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   constructor(
@@ -64,6 +65,13 @@ export class ListComponent extends BaseComponent implements OnInit{
     })
   }
 
+  showQRCode(productId:string){
+    this.dialogService.openDialog({
+      componentType:QrcodeDialogComponent,
+      data:productId,
+      afterClosed:()=>{}
+    });
+  }
 
 
 }

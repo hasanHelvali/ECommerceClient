@@ -30,7 +30,8 @@ export class HttpClientService {
           url=url.replaceAll(" ","");
         }
 
-       return this.httpClient.get<T>(url,{headers:requestParameters.headers})
+       return this.httpClient.get<T>(url,{headers:requestParameters.headers,responseType:requestParameters.responseType as 'json'})
+       //as json ile responseType da ne verirsek verelim bunu json gibi algılayacak. 
     }
 
     post<T>(requestParameters:Partial<RequestParameters>,body:Partial<T>):Observable<T>{
@@ -43,7 +44,7 @@ export class HttpClientService {
         url=url.replaceAll(" ","");
       }
 
-      return this.httpClient.post<T>(url,body,{headers:requestParameters.headers})
+      return this.httpClient.post<T>(url,body,{headers:requestParameters.headers,responseType:requestParameters.responseType as 'json'})
     }
 
     put<T>(requestParameters:Partial<RequestParameters>,body:Partial<T>):Observable<T>{
@@ -55,7 +56,7 @@ export class HttpClientService {
         url=url.replace("\n","");
         url=url.replaceAll(" ","");
       }
-      return this.httpClient.put<T>(url,body,{headers:requestParameters.headers})
+      return this.httpClient.put<T>(url,body,{headers:requestParameters.headers,responseType:requestParameters.responseType as 'json'})
     }
 
     delete<T>(requestParameters:Partial<RequestParameters>,id:string):Observable<T>{
@@ -68,7 +69,7 @@ export class HttpClientService {
         url=url.replaceAll(" ","");
       }
 
-        return this.httpClient.delete<T>(url,{headers:requestParameters.headers})
+        return this.httpClient.delete<T>(url,{headers:requestParameters.headers,responseType:requestParameters.responseType as 'json'})
 
     }
 }
@@ -79,5 +80,6 @@ export class RequestParameters{
   headers?:HttpHeaders;
   baseUrl?:string;
   fullEndPoint?:string;
+  responseType?:string="json";//default hali json dir lakin ezilebilir.
   //Tum istekler icin genel kullanılabilecek yapıları burada yazmıs oldum.
 }
