@@ -20,7 +20,11 @@ import { CdkTableModule } from '@angular/cdk/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { AuthorizeUserDialogComponent } from './authorize-user-dialog/authorize-user-dialog.component';
-import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component'; 
+import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component';
+import { QrcodeReadingDialogComponent } from './qrcode-reading-dialog/qrcode-reading-dialog.component'; 
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { NgxScannerQrcodeModule } from 'ngx-scanner-qrcode';
 @NgModule({
   declarations: [
     DeleteDialogComponent,
@@ -32,13 +36,14 @@ import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component';
     AuthorizeMenuDialogComponent,
     AuthorizeUserDialogComponent,
     QrcodeDialogComponent,
+    QrcodeReadingDialogComponent,
   ],
   imports: [
+    MatDialogModule,
     MatTableModule,
     CdkTableModule,
     MatButtonModule,
     CommonModule,
-    MatDialogModule,
     MatCardModule,
     MatTooltipModule,
     MatToolbarModule,
@@ -47,6 +52,9 @@ import { QrcodeDialogComponent } from './qrcode-dialog/qrcode-dialog.component';
     MatOptionModule,
     MatListModule,
     MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    NgxScannerQrcodeModule
   ]
   // exports:[
   //   DeleteDialogComponent,
